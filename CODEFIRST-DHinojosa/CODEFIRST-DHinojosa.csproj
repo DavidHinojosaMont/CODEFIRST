@@ -11,6 +11,10 @@
   <ItemGroup>
     <Compile Remove="Migrations\20240222152237_Products.cs" />
     <Compile Remove="Migrations\20240222152237_Products.Designer.cs" />
+    <Compile Remove="Migrations\20240222165357_EmployeesCustomers.cs" />
+    <Compile Remove="Migrations\20240222165357_EmployeesCustomers.Designer.cs" />
+    <Compile Remove="Migrations\20240222165755_EmployeesCustomers2.cs" />
+    <Compile Remove="Migrations\20240222165755_EmployeesCustomers2.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
