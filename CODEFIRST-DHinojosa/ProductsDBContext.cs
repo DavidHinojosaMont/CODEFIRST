@@ -27,7 +27,9 @@ namespace CODEFIRST_DHinojosa
         }
         public virtual DbSet<ProductLines> ProductLines { get; set; }
         public virtual DbSet<Products> Products { get; set; }
-        public virtual DbSet<OrderDetails> OrderDetails { get; set; }
+        public virtual DbSet<Offices> Offices { get; set; }
+        //public virtual DbSet<OrderDetails> OrderDetails { get; set; }
+        //public virtual DbSet<Orders> Orders { get; set; }
 
 
     }
