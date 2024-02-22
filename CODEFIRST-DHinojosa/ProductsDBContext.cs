@@ -30,8 +30,9 @@ namespace CODEFIRST_DHinojosa
         public virtual DbSet<Offices> Offices { get; set; }
         public virtual DbSet<Employees> Employees { get; set; }
         public virtual DbSet<Customers> Customers { get; set; }
-        //public virtual DbSet<OrderDetails> OrderDetails { get; set; }
-        //public virtual DbSet<Orders> Orders { get; set; }
+        public virtual DbSet<Payments> Payments { get; set; }
+        public virtual DbSet<OrderDetails> OrderDetails { get; set; }
+        public virtual DbSet<Orders> Orders { get; set; }
 
 
     }

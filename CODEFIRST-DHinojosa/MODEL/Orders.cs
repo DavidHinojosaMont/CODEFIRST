@@ -15,15 +15,19 @@ namespace CODEFIRST_DHinojosa.MODEL
         [Column(TypeName = "int(11)")]
         public int OrderNumber { get; set; }
         [Column(TypeName = "date")]
-        public Date OrderDate { get; set; }
+        public DateTime OrderDate { get; set; }
         [Column(TypeName = "date")]
-        public Date RequiredDate { get; set; }
+        public DateTime RequiredDate { get; set; }
         [Column(TypeName = "date")]
-        public Date ShippedDate { get; set; }
+        public DateTime ShippedDate { get; set; }
         [Column(TypeName = "varchar(15)")]
         public string Status { get; set; }
         [Column(TypeName = "text")]
         public string Comments { get; set; }
+        [ForeignKey("Customers")]
+        [Column(TypeName = "int(11)")]
+        public int CustomerNumber { get; set; }
+        public Customers Customers { get; set; }
 
     }
 }
