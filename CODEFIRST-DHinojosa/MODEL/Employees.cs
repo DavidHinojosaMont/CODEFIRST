@@ -30,10 +30,10 @@ namespace CODEFIRST_DHinojosa.MODEL
         [StringLength(10)]
         public string OfficeCode { get; set; }
         public Offices Offices { get; set; }
-        [ForeignKey("Customers")]
+        [ForeignKey("Employees")]
         [Column(TypeName = "int(11)")]
         public int ReportsTo { get; set; }
-        public Customers Customers { get; set; }
+        public Employees employeeNumber { get; set; }
         [Column(TypeName = "varchar(50)")]
         [StringLength(50)]
         public string JobTitle { get; set; }

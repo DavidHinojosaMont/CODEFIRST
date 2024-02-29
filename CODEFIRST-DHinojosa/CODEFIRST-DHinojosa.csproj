@@ -11,26 +11,40 @@
   <ItemGroup>
     <Compile Remove="Migrations\20240222152237_Products.cs" />
     <Compile Remove="Migrations\20240222152237_Products.Designer.cs" />
+    <Compile Remove="Migrations\20240222153516_Products.cs" />
+    <Compile Remove="Migrations\20240222153516_Products.Designer.cs" />
+    <Compile Remove="Migrations\20240222154549_OrderDetails.cs" />
+    <Compile Remove="Migrations\20240222154549_OrderDetails.Designer.cs" />
+    <Compile Remove="Migrations\20240222162004_Offices.cs" />
+    <Compile Remove="Migrations\20240222162004_Offices.Designer.cs" />
     <Compile Remove="Migrations\20240222165357_EmployeesCustomers.cs" />
     <Compile Remove="Migrations\20240222165357_EmployeesCustomers.Designer.cs" />
     <Compile Remove="Migrations\20240222165755_EmployeesCustomers2.cs" />
     <Compile Remove="Migrations\20240222165755_EmployeesCustomers2.Designer.cs" />
+    <Compile Remove="Migrations\20240222170129_CustomersEmployees.cs" />
+    <Compile Remove="Migrations\20240222170129_CustomersEmployees.Designer.cs" />
     <Compile Remove="Migrations\20240222173553_OrdersPayments.cs" />
     <Compile Remove="Migrations\20240222173553_OrdersPayments.Designer.cs" />
     <Compile Remove="Migrations\20240222173951_OrdersPayments.cs" />
     <Compile Remove="Migrations\20240222173951_OrdersPayments.Designer.cs" />
+    <Compile Remove="Migrations\20240229151929_CustomersFix.cs" />
+    <Compile Remove="Migrations\20240229151929_CustomersFix.Designer.cs" />
+    <Compile Remove="Migrations\20240229153129_ProductsFix.cs" />
+    <Compile Remove="Migrations\20240229153129_ProductsFix.Designer.cs" />
+    <Compile Remove="Migrations\20240229154552_finalMigration.cs" />
+    <Compile Remove="Migrations\20240229154552_finalMigration.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="classicmodels.sql" />
     <None Remove="CUSTOMERS.csv" />
+    <None Remove="Data\OFFICES.csv" />
+    <None Remove="Data\ORDERDETAILS.csv" />
+    <None Remove="Data\ORDERS.csv" />
+    <None Remove="Data\PAYMENTS.csv" />
+    <None Remove="Data\PRODUCTLINES.csv" />
+    <None Remove="Data\PRODUCTS.csv" />
     <None Remove="EMPLOYEES.csv" />
-    <None Remove="OFFICES.csv" />
-    <None Remove="ORDERDETAILS.csv" />
-    <None Remove="ORDERS.csv" />
-    <None Remove="PAYMENTS.csv" />
-    <None Remove="PRODUCTLINES.csv" />
-    <None Remove="PRODUCTS.csv" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,28 +60,28 @@
     <Resource Include="classicmodels.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="CUSTOMERS.csv">
+    <Resource Include="Data\CUSTOMERS.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="EMPLOYEES.csv">
+    <Resource Include="Data\OFFICES.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="OFFICES.csv">
+    <Resource Include="Data\ORDERDETAILS.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="ORDERDETAILS.csv">
+    <Resource Include="Data\ORDERS.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="ORDERS.csv">
+    <Resource Include="Data\PAYMENTS.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="PAYMENTS.csv">
+    <Resource Include="Data\PRODUCTLINES.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="PRODUCTLINES.csv">
+    <Resource Include="Data\PRODUCTS.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="PRODUCTS.csv">
+    <Resource Include="Data\EMPLOYEES.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

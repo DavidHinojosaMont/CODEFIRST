@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CODEFIRST_DHinojosa.DAO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,15 @@ namespace CODEFIRST_DHinojosa
     /// </summary>
     public partial class MainWindow : Window
     {
+        const string FILEPRODUCTLINES = "PRODUCTLINES.csv";
+        private ProductsDBContext context = new ProductsDBContext();
+        IDAOManager manager;
+
         public MainWindow()
         {
             InitializeComponent();
+            manager = DAOFactory.CreateDAOManager(context);
+            manager.ImportProductLines(FILEPRODUCTLINES);
         }
     }
 }

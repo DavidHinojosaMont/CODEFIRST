@@ -8,9 +8,9 @@ namespace CODEFIRST_DHinojosa.DAO
 {
     internal class DAOFactory
     {
-        public static IDAOManager CreateDAOManager()
+        public static IDAOManager CreateDAOManager(ProductsDBContext context)
         {
-            return new DAOManager();
+            return new DAOManager(context);
         }
     }
 }

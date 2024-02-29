@@ -33,6 +33,9 @@ namespace CODEFIRST_DHinojosa.MODEL
         public string AddressLine2 { get; set; }
         [Column(TypeName = "varchar(50)")]
         [StringLength(50)]
+        public string City { get; set; }
+        [Column(TypeName = "varchar(50)")]
+        [StringLength(50)]
         public string State { get; set; }
         [Column(TypeName = "varchar(15)")]
         [StringLength(15)]

@@ -25,6 +25,9 @@ namespace CODEFIRST_DHinojosa.MODEL
         [Column(TypeName = "varchar(10)")]
         [StringLength(10)]
         public string ProductScale { get; set; }
+        [Column(TypeName ="varchar(50)")]
+        [StringLength(50)]
+        public string ProductVendor { get; set; }
         [Column(TypeName = "text")]
         public string productDescription { get; set; }
         [Column(TypeName = "smallint(6)")]

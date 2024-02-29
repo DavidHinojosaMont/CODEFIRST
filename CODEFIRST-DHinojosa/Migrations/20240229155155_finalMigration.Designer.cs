@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CODEFIRST_DHinojosa.Migrations
 {
     [DbContext(typeof(ProductsDBContext))]
-    [Migration("20240222174204_OrdersPayments")]
-    partial class OrdersPayments
+    [Migration("20240229155155_finalMigration")]
+    partial class finalMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,6 +31,11 @@ namespace CODEFIRST_DHinojosa.Migrations
                         .HasMaxLength(50);
 
                     b.Property<string>("AddressLine2")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("City")
                         .IsRequired()
                         .HasColumnType("varchar(50)")
                         .HasMaxLength(50);
@@ -94,6 +99,9 @@ namespace CODEFIRST_DHinojosa.Migrations
                         .HasColumnType("varchar(100)")
                         .HasMaxLength(100);
 
+                    b.Property<int>("EmployeeNumber1")
+                        .HasColumnType("int(11)");
+
                     b.Property<string>("Extension")
                         .IsRequired()
                         .HasColumnType("varchar(10)")
@@ -124,9 +132,9 @@ namespace CODEFIRST_DHinojosa.Migrations
 
                     b.HasKey("EmployeeNumber");
 
-                    b.HasIndex("OfficeCode");
+                    b.HasIndex("EmployeeNumber1");
 
-                    b.HasIndex("ReportsTo");
+                    b.HasIndex("OfficeCode");
 
                     b.ToTable("Employees");
                 });
@@ -313,6 +321,11 @@ namespace CODEFIRST_DHinojosa.Migrations
                         .HasColumnType("varchar(10)")
                         .HasMaxLength(10);
 
+                    b.Property<string>("ProductVendor")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)")
+                        .HasMaxLength(50);
+
                     b.Property<short>("QuantityInStock")
                         .HasColumnType("smallint(6)");
 
@@ -338,15 +351,15 @@ namespace CODEFIRST_DHinojosa.Migrations
 
             modelBuilder.Entity("CODEFIRST_DHinojosa.MODEL.Employees", b =>
                 {
-                    b.HasOne("CODEFIRST_DHinojosa.MODEL.Offices", "Offices")
+                    b.HasOne("CODEFIRST_DHinojosa.MODEL.Employees", "employeeNumber")
                         .WithMany()
-                        .HasForeignKey("OfficeCode")
+                        .HasForeignKey("EmployeeNumber1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CODEFIRST_DHinojosa.MODEL.Customers", "Customers")
+                    b.HasOne("CODEFIRST_DHinojosa.MODEL.Offices", "Offices")
                         .WithMany()
-                        .HasForeignKey("ReportsTo")
+                        .HasForeignKey("OfficeCode")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
