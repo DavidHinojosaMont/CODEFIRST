@@ -22,6 +22,7 @@ namespace CODEFIRST_DHinojosa
     public partial class MainWindow : Window
     {
         const string FILEPRODUCTLINES = "PRODUCTLINES.csv";
+        const string FILEPRODUCTS = "PRODUCTS.csv";
         private ProductsDBContext context = new ProductsDBContext();
         IDAOManager manager;
 
@@ -29,7 +30,7 @@ namespace CODEFIRST_DHinojosa
         {
             InitializeComponent();
             manager = DAOFactory.CreateDAOManager(context);
-            manager.ImportProductLines(FILEPRODUCTLINES);
+            manager.ImportProducts(FILEPRODUCTS);
         }
     }
 }
