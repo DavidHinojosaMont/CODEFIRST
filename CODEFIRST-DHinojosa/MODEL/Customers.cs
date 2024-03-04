@@ -10,6 +10,11 @@ namespace CODEFIRST_DHinojosa.MODEL
 {
     internal class Customers
     {
+        public Customers()
+        {
+            Payments = new HashSet<Payments>();
+            Orders = new HashSet<Orders>();
+        }
         [Key]
         [Column(TypeName ="int(11)")]
         public int CustomerNumber { get; set; }
@@ -45,10 +50,12 @@ namespace CODEFIRST_DHinojosa.MODEL
         public string Country { get; set; }
         [ForeignKey("Employees")]
         [Column(TypeName = "int(11)")]
-        public int SalesRepEmployeeNumber { get; set; }
+        public int? SalesRepEmployeeNumber { get; set; }
         public Employees Employees { get; set; }
         [Column(TypeName = "decimal(10,2)")]
         public double CreditLimit { get; set; }
 
+        public ICollection<Payments> Payments { get; set; }
+        public ICollection<Orders> Orders { get; set; }
     }
 }

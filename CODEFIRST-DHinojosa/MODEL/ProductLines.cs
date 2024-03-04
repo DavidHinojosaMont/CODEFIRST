@@ -10,6 +10,11 @@ namespace CODEFIRST_DHinojosa.MODEL
 {
     internal class ProductLines
     {
+
+        public ProductLines()
+        {
+            Products = new HashSet<Products>();
+        }
         [Key]
         [Column(TypeName = "varchar(50)")]
         [StringLength(50)]
@@ -21,5 +26,7 @@ namespace CODEFIRST_DHinojosa.MODEL
         public string htmlDescription { get; set; }
         [Column(TypeName = "mediumblob")]
         public byte[] Image { get; set; }
+
+        public ICollection<Products> Products { get; set; }
     }
 }

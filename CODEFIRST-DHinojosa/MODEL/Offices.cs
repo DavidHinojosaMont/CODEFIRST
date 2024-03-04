@@ -10,6 +10,10 @@ namespace CODEFIRST_DHinojosa.MODEL
 {
     internal class Offices
     {
+        public Offices()
+        {
+            Employees = new HashSet<Employees>();
+        }
         [Key]
         [Column(TypeName = "varchar(10)")]
         [StringLength(10)]
@@ -38,5 +42,7 @@ namespace CODEFIRST_DHinojosa.MODEL
         [Column(TypeName = "varchar(10)")]
         [StringLength(10)]
         public string Territory { get; set; }
+
+        public ICollection<Employees> Employees { get; set; }
     }
 }

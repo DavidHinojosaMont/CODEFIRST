@@ -10,6 +10,10 @@ namespace CODEFIRST_DHinojosa.MODEL
 {
     internal class Products
     {
+        public Products()
+        {
+            OrderDetails = new HashSet<OrderDetails>();
+        }
         [Key]
         [Column(TypeName = "varchar(15)")]
         [StringLength(15)]
@@ -37,5 +41,6 @@ namespace CODEFIRST_DHinojosa.MODEL
         [Column(TypeName = "decimal(10,2)")]
         public double MSRP { get; set; }
 
+        public ICollection<OrderDetails> OrderDetails { get; set; }
     }
 }

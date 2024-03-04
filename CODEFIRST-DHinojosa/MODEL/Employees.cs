@@ -32,7 +32,7 @@ namespace CODEFIRST_DHinojosa.MODEL
         public Offices Offices { get; set; }
         [ForeignKey("Employees")]
         [Column(TypeName = "int(11)")]
-        public int ReportsTo { get; set; }
+        public int? ReportsTo { get; set; }
         public Employees employeeNumber { get; set; }
         [Column(TypeName = "varchar(50)")]
         [StringLength(50)]

@@ -11,6 +11,10 @@ namespace CODEFIRST_DHinojosa.MODEL
 {
     internal class Orders
     {
+        public Orders() {
+
+            OrderDetails = new HashSet<OrderDetails>();
+        }
         [Key]
         [Column(TypeName = "int(11)")]
         public int OrderNumber { get; set; }
@@ -29,5 +33,6 @@ namespace CODEFIRST_DHinojosa.MODEL
         public int CustomerNumber { get; set; }
         public Customers Customers { get; set; }
 
+        public ICollection<OrderDetails> OrderDetails { get; set; }
     }
 }
