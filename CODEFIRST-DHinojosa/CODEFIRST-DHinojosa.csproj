@@ -33,6 +33,22 @@
     <Compile Remove="Migrations\20240229153129_ProductsFix.Designer.cs" />
     <Compile Remove="Migrations\20240229154552_finalMigration.cs" />
     <Compile Remove="Migrations\20240229154552_finalMigration.Designer.cs" />
+    <Compile Remove="Migrations\20240229155155_finalMigration.cs" />
+    <Compile Remove="Migrations\20240229155155_finalMigration.Designer.cs" />
+    <Compile Remove="Migrations\20240304173443_iCollections.cs" />
+    <Compile Remove="Migrations\20240304173443_iCollections.Designer.cs" />
+    <Compile Remove="Migrations\20240306181409_employeeNull.cs" />
+    <Compile Remove="Migrations\20240306181409_employeeNull.Designer.cs" />
+    <Compile Remove="Migrations\20240306185211_paymentKey.cs" />
+    <Compile Remove="Migrations\20240306185211_paymentKey.Designer.cs" />
+    <Compile Remove="Migrations\20240306185910_shippedNull.cs" />
+    <Compile Remove="Migrations\20240306185910_shippedNull.Designer.cs" />
+    <Compile Remove="Migrations\20240306194817_detailsCompositeKey.cs" />
+    <Compile Remove="Migrations\20240306194817_detailsCompositeKey.Designer.cs" />
+    <Compile Remove="Migrations\20240306195510_paymentsCompositeKey.cs" />
+    <Compile Remove="Migrations\20240306195510_paymentsCompositeKey.Designer.cs" />
+    <Compile Remove="Migrations\20240306200239_paymentsComposite.cs" />
+    <Compile Remove="Migrations\20240306200239_paymentsComposite.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -15,6 +15,7 @@ namespace CODEFIRST_DHinojosa.MODEL
         [Column(TypeName = "int(11)")]
         public int OrderNumber { get; set; }
         public Orders Orders { get; set; }
+        [Key]
         [ForeignKey("Products")]
         [Column(TypeName = "varchar(15)")]
         [StringLength(15)]

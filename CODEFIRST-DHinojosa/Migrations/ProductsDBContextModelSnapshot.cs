@@ -190,6 +190,9 @@ namespace CODEFIRST_DHinojosa.Migrations
 
             modelBuilder.Entity("CODEFIRST_DHinojosa.MODEL.OrderDetails", b =>
                 {
+                    b.Property<int>("OrderNumber")
+                        .HasColumnType("int(11)");
+
                     b.Property<string>("ProductCode")
                         .HasColumnType("varchar(15)")
                         .HasMaxLength(15);
@@ -197,18 +200,15 @@ namespace CODEFIRST_DHinojosa.Migrations
                     b.Property<short>("OrderLineNumber")
                         .HasColumnType("smallint(6)");
 
-                    b.Property<int>("OrderNumber")
-                        .HasColumnType("int(11)");
-
                     b.Property<decimal>("PriceEach")
                         .HasColumnType("decimal(10,2)");
 
                     b.Property<int>("QuantityOrdered")
                         .HasColumnType("int(11)");
 
-                    b.HasKey("ProductCode");
+                    b.HasKey("OrderNumber", "ProductCode");
 
-                    b.HasIndex("OrderNumber");
+                    b.HasIndex("ProductCode");
 
                     b.ToTable("OrderDetails");
                 });
@@ -252,16 +252,16 @@ namespace CODEFIRST_DHinojosa.Migrations
                         .HasColumnType("varchar(50)")
                         .HasMaxLength(50);
 
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(10,2)");
-
                     b.Property<int>("CustomerNumber")
                         .HasColumnType("int(11)");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<DateTime>("PaymentDate")
                         .HasColumnType("date");
 
-                    b.HasKey("CheckNumber");
+                    b.HasKey("CheckNumber", "CustomerNumber");
 
                     b.HasIndex("CustomerNumber");
 

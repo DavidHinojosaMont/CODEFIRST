@@ -36,13 +36,13 @@ namespace CODEFIRST_DHinojosa
         {
             InitializeComponent();
             manager = DAOFactory.CreateDAOManager(context);
-            //manager.ImportProductLines(FILEPRODUCTLINES);
-            //manager.ImportProducts(FILEPRODUCTS);
-            //manager.ImportOffices(FILEOFFICES);
-            //manager.ImportEmployees(FILEMPLOYEES);
-            //manager.ImportCustomers(FILECUSTOMERS);
-            //manager.ImportPayments(FILEPAYMENTS);
-            //manager.ImportOrders(FILEORDERS);
+            manager.ImportProductLines(FILEPRODUCTLINES);
+            manager.ImportProducts(FILEPRODUCTS);
+            manager.ImportOffices(FILEOFFICES);
+            manager.ImportEmployees(FILEMPLOYEES);
+            manager.ImportCustomers(FILECUSTOMERS);
+            manager.ImportPayments(FILEPAYMENTS);
+            manager.ImportOrders(FILEORDERS);
             manager.ImportOrderDetails(FILEORDERDETAILS);
         }
     }

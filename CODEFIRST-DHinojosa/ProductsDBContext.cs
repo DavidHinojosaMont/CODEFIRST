@@ -34,6 +34,14 @@ namespace CODEFIRST_DHinojosa
         public virtual DbSet<OrderDetails> OrderDetails { get; set; }
         public virtual DbSet<Orders> Orders { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+                modelBuilder.Entity<OrderDetails>()
+                .HasKey(o => new { o.OrderNumber, o.ProductCode });
+
+                modelBuilder.Entity<Payments>()
+                .HasKey(o => new { o.CheckNumber, o.CustomerNumber });
+        }
 
     }
 }

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CODEFIRST_DHinojosa.Migrations
 {
-    public partial class finalMigration : Migration
+    public partial class finalCompositeKeys : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -63,8 +63,8 @@ namespace CODEFIRST_DHinojosa.Migrations
                     Extension = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false),
                     Email = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
                     OfficeCode = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false),
-                    ReportsTo = table.Column<int>(type: "int(11)", nullable: false),
-                    EmployeeNumber1 = table.Column<int>(nullable: false),
+                    ReportsTo = table.Column<int>(type: "int(11)", nullable: true),
+                    EmployeeNumber1 = table.Column<int>(nullable: true),
                     JobTitle = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
@@ -75,7 +75,7 @@ namespace CODEFIRST_DHinojosa.Migrations
                         column: x => x.EmployeeNumber1,
                         principalTable: "Employees",
                         principalColumn: "EmployeeNumber",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Employees_Offices_OfficeCode",
                         column: x => x.OfficeCode,
@@ -100,7 +100,7 @@ namespace CODEFIRST_DHinojosa.Migrations
                     State = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
                     PostalCode = table.Column<string>(type: "varchar(15)", maxLength: 15, nullable: false),
                     Country = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
-                    SalesRepEmployeeNumber = table.Column<int>(type: "int(11)", nullable: false),
+                    SalesRepEmployeeNumber = table.Column<int>(type: "int(11)", nullable: true),
                     CreditLimit = table.Column<decimal>(type: "decimal(10,2)", nullable: false)
                 },
                 constraints: table =>
@@ -111,7 +111,7 @@ namespace CODEFIRST_DHinojosa.Migrations
                         column: x => x.SalesRepEmployeeNumber,
                         principalTable: "Employees",
                         principalColumn: "EmployeeNumber",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -122,7 +122,7 @@ namespace CODEFIRST_DHinojosa.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     OrderDate = table.Column<DateTime>(type: "date", nullable: false),
                     RequiredDate = table.Column<DateTime>(type: "date", nullable: false),
-                    ShippedDate = table.Column<DateTime>(type: "date", nullable: false),
+                    ShippedDate = table.Column<DateTime>(type: "date", nullable: true),
                     Status = table.Column<string>(type: "varchar(15)", nullable: false),
                     Comments = table.Column<string>(type: "text", nullable: false),
                     CustomerNumber = table.Column<int>(type: "int(11)", nullable: false)
@@ -149,7 +149,7 @@ namespace CODEFIRST_DHinojosa.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Payments", x => x.CustomerNumber);
+                    table.PrimaryKey("PK_Payments", x => new { x.CheckNumber, x.CustomerNumber });
                     table.ForeignKey(
                         name: "FK_Payments_Customers_CustomerNumber",
                         column: x => x.CustomerNumber,
@@ -170,7 +170,7 @@ namespace CODEFIRST_DHinojosa.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrderDetails", x => x.OrderNumber);
+                    table.PrimaryKey("PK_OrderDetails", x => new { x.OrderNumber, x.ProductCode });
                     table.ForeignKey(
                         name: "FK_OrderDetails_Orders_OrderNumber",
                         column: x => x.OrderNumber,
@@ -208,6 +208,11 @@ namespace CODEFIRST_DHinojosa.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_CustomerNumber",
                 table: "Orders",
+                column: "CustomerNumber");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Payments_CustomerNumber",
+                table: "Payments",
                 column: "CustomerNumber");
 
             migrationBuilder.CreateIndex(

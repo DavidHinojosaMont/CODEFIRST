@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CODEFIRST_DHinojosa.Migrations
 {
     [DbContext(typeof(ProductsDBContext))]
-    [Migration("20240229155155_finalMigration")]
-    partial class finalMigration
+    [Migration("20240306200809_finalCompositeKeys")]
+    partial class finalCompositeKeys
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -73,7 +73,7 @@ namespace CODEFIRST_DHinojosa.Migrations
                         .HasColumnType("varchar(15)")
                         .HasMaxLength(15);
 
-                    b.Property<int>("SalesRepEmployeeNumber")
+                    b.Property<int?>("SalesRepEmployeeNumber")
                         .HasColumnType("int(11)");
 
                     b.Property<string>("State")
@@ -99,7 +99,7 @@ namespace CODEFIRST_DHinojosa.Migrations
                         .HasColumnType("varchar(100)")
                         .HasMaxLength(100);
 
-                    b.Property<int>("EmployeeNumber1")
+                    b.Property<int?>("EmployeeNumber1")
                         .HasColumnType("int(11)");
 
                     b.Property<string>("Extension")
@@ -127,7 +127,7 @@ namespace CODEFIRST_DHinojosa.Migrations
                         .HasColumnType("varchar(10)")
                         .HasMaxLength(10);
 
-                    b.Property<int>("ReportsTo")
+                    b.Property<int?>("ReportsTo")
                         .HasColumnType("int(11)");
 
                     b.HasKey("EmployeeNumber");
@@ -195,21 +195,20 @@ namespace CODEFIRST_DHinojosa.Migrations
                     b.Property<int>("OrderNumber")
                         .HasColumnType("int(11)");
 
+                    b.Property<string>("ProductCode")
+                        .HasColumnType("varchar(15)")
+                        .HasMaxLength(15);
+
                     b.Property<short>("OrderLineNumber")
                         .HasColumnType("smallint(6)");
 
                     b.Property<decimal>("PriceEach")
                         .HasColumnType("decimal(10,2)");
 
-                    b.Property<string>("ProductCode")
-                        .IsRequired()
-                        .HasColumnType("varchar(15)")
-                        .HasMaxLength(15);
-
                     b.Property<int>("QuantityOrdered")
                         .HasColumnType("int(11)");
 
-                    b.HasKey("OrderNumber");
+                    b.HasKey("OrderNumber", "ProductCode");
 
                     b.HasIndex("ProductCode");
 
@@ -235,7 +234,7 @@ namespace CODEFIRST_DHinojosa.Migrations
                     b.Property<DateTime>("RequiredDate")
                         .HasColumnType("date");
 
-                    b.Property<DateTime>("ShippedDate")
+                    b.Property<DateTime?>("ShippedDate")
                         .HasColumnType("date");
 
                     b.Property<string>("Status")
@@ -251,21 +250,22 @@ namespace CODEFIRST_DHinojosa.Migrations
 
             modelBuilder.Entity("CODEFIRST_DHinojosa.MODEL.Payments", b =>
                 {
+                    b.Property<string>("CheckNumber")
+                        .HasColumnType("varchar(50)")
+                        .HasMaxLength(50);
+
                     b.Property<int>("CustomerNumber")
                         .HasColumnType("int(11)");
 
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(10,2)");
 
-                    b.Property<string>("CheckNumber")
-                        .IsRequired()
-                        .HasColumnType("varchar(50)")
-                        .HasMaxLength(50);
-
                     b.Property<DateTime>("PaymentDate")
                         .HasColumnType("date");
 
-                    b.HasKey("CustomerNumber");
+                    b.HasKey("CheckNumber", "CustomerNumber");
+
+                    b.HasIndex("CustomerNumber");
 
                     b.ToTable("Payments");
                 });
@@ -344,21 +344,17 @@ namespace CODEFIRST_DHinojosa.Migrations
                 {
                     b.HasOne("CODEFIRST_DHinojosa.MODEL.Employees", "Employees")
                         .WithMany()
-                        .HasForeignKey("SalesRepEmployeeNumber")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SalesRepEmployeeNumber");
                 });
 
             modelBuilder.Entity("CODEFIRST_DHinojosa.MODEL.Employees", b =>
                 {
                     b.HasOne("CODEFIRST_DHinojosa.MODEL.Employees", "employeeNumber")
                         .WithMany()
-                        .HasForeignKey("EmployeeNumber1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EmployeeNumber1");
 
                     b.HasOne("CODEFIRST_DHinojosa.MODEL.Offices", "Offices")
-                        .WithMany()
+                        .WithMany("Employees")
                         .HasForeignKey("OfficeCode")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -367,13 +363,13 @@ namespace CODEFIRST_DHinojosa.Migrations
             modelBuilder.Entity("CODEFIRST_DHinojosa.MODEL.OrderDetails", b =>
                 {
                     b.HasOne("CODEFIRST_DHinojosa.MODEL.Orders", "Orders")
-                        .WithMany()
+                        .WithMany("OrderDetails")
                         .HasForeignKey("OrderNumber")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("CODEFIRST_DHinojosa.MODEL.Products", "Products")
-                        .WithMany()
+                        .WithMany("OrderDetails")
                         .HasForeignKey("ProductCode")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -382,7 +378,7 @@ namespace CODEFIRST_DHinojosa.Migrations
             modelBuilder.Entity("CODEFIRST_DHinojosa.MODEL.Orders", b =>
                 {
                     b.HasOne("CODEFIRST_DHinojosa.MODEL.Customers", "Customers")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("CustomerNumber")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -391,7 +387,7 @@ namespace CODEFIRST_DHinojosa.Migrations
             modelBuilder.Entity("CODEFIRST_DHinojosa.MODEL.Payments", b =>
                 {
                     b.HasOne("CODEFIRST_DHinojosa.MODEL.Customers", "Customers")
-                        .WithMany()
+                        .WithMany("Payments")
                         .HasForeignKey("CustomerNumber")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -400,7 +396,7 @@ namespace CODEFIRST_DHinojosa.Migrations
             modelBuilder.Entity("CODEFIRST_DHinojosa.MODEL.Products", b =>
                 {
                     b.HasOne("CODEFIRST_DHinojosa.MODEL.ProductLines", "ProductLines")
-                        .WithMany()
+                        .WithMany("Products")
                         .HasForeignKey("ProductLine")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
