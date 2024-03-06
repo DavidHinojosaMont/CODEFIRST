@@ -10,11 +10,11 @@ namespace CODEFIRST_DHinojosa.MODEL
 {
     internal class Payments
     {
-        [Key]
         [ForeignKey("Customers")]
         [Column(TypeName = "int(11)")]
         public int CustomerNumber { get; set; }
         public Customers Customers { get; set; }
+        [Key]
         [Column(TypeName = "varchar(50)")]
         [StringLength(50)]
         public string CheckNumber { get; set; }

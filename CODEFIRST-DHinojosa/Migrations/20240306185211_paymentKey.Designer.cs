@@ -3,14 +3,16 @@ using System;
 using CODEFIRST_DHinojosa;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CODEFIRST_DHinojosa.Migrations
 {
     [DbContext(typeof(ProductsDBContext))]
-    partial class ProductsDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240306185211_paymentKey")]
+    partial class paymentKey
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -190,25 +192,26 @@ namespace CODEFIRST_DHinojosa.Migrations
 
             modelBuilder.Entity("CODEFIRST_DHinojosa.MODEL.OrderDetails", b =>
                 {
-                    b.Property<string>("ProductCode")
-                        .HasColumnType("varchar(15)")
-                        .HasMaxLength(15);
+                    b.Property<int>("OrderNumber")
+                        .HasColumnType("int(11)");
 
                     b.Property<short>("OrderLineNumber")
                         .HasColumnType("smallint(6)");
 
-                    b.Property<int>("OrderNumber")
-                        .HasColumnType("int(11)");
-
                     b.Property<decimal>("PriceEach")
                         .HasColumnType("decimal(10,2)");
+
+                    b.Property<string>("ProductCode")
+                        .IsRequired()
+                        .HasColumnType("varchar(15)")
+                        .HasMaxLength(15);
 
                     b.Property<int>("QuantityOrdered")
                         .HasColumnType("int(11)");
 
-                    b.HasKey("ProductCode");
+                    b.HasKey("OrderNumber");
 
-                    b.HasIndex("OrderNumber");
+                    b.HasIndex("ProductCode");
 
                     b.ToTable("OrderDetails");
                 });
@@ -232,7 +235,7 @@ namespace CODEFIRST_DHinojosa.Migrations
                     b.Property<DateTime>("RequiredDate")
                         .HasColumnType("date");
 
-                    b.Property<DateTime?>("ShippedDate")
+                    b.Property<DateTime>("ShippedDate")
                         .HasColumnType("date");
 
                     b.Property<string>("Status")

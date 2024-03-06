@@ -51,7 +51,7 @@ namespace CODEFIRST_DHinojosa.MODEL
         [ForeignKey("Employees")]
         [Column(TypeName = "int(11)")]
         public int? SalesRepEmployeeNumber { get; set; }
-        public Employees Employees { get; set; }
+        public Employees? Employees { get; set; }
         [Column(TypeName = "decimal(10,2)")]
         public double CreditLimit { get; set; }
 

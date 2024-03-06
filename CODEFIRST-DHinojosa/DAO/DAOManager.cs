@@ -33,22 +33,22 @@ namespace CODEFIRST_DHinojosa.DAO
                     {
                         fields = parser.ReadFields();
 
-                        Customers customers = new Customers()
-                        {
-                            CustomerNumber = Convert.ToInt32(fields[0]),
-                            CustomerName = fields[1],
-                            ContactLastName = fields[2],
-                            ContactFirstName = fields[3],
-                            Phone = fields[4],
-                            AddressLine1 = fields[5],
-                            AddressLine2 = fields[6],
-                            City = fields[7],
-                            State = fields[8],
-                            PostalCode = fields[9],
-                            Country = fields[10],
-                            SalesRepEmployeeNumber = Convert.ToInt32(fields[11]),
-                            CreditLimit = Convert.ToDouble(fields[12])
-                        };
+                        Customers customers = new Customers();
+
+                        customers.CustomerNumber = Convert.ToInt32(fields[0]);
+                        customers.CustomerName = fields[1];
+                        customers.ContactLastName = fields[2];
+                        customers.ContactFirstName = fields[3];
+                        customers.Phone = fields[4];
+                        customers.AddressLine1 = fields[5];
+                        customers.AddressLine2 = fields[6];
+                        customers.City = fields[7];
+                        customers.State = fields[8];
+                        customers.PostalCode = fields[9];
+                        customers.Country = fields[10];
+                        if (fields[11] == "NULL") customers.SalesRepEmployeeNumber = null;
+                        else customers.SalesRepEmployeeNumber = Convert.ToInt32(fields[11]);
+                        customers.CreditLimit = Convert.ToDouble(fields[12]);
 
                         context.Customers.Add(customers);
                         context.SaveChanges();
@@ -66,29 +66,29 @@ namespace CODEFIRST_DHinojosa.DAO
             bool done = false;
             try
             {
-                using (TextFieldParser parser = new TextFieldParser(filename))
+                using (TextFieldParser? parser = new TextFieldParser(filename))
                 {
                     parser.TextFieldType = FieldType.Delimited;
                     parser.SetDelimiters(",");
                     parser.HasFieldsEnclosedInQuotes = true;
 
-                    string[] fields = parser.ReadFields();
+                    string[]? fields = parser.ReadFields();
 
                     while (!parser.EndOfData)
                     {
                         fields = parser.ReadFields();
 
-                        Employees employees = new Employees()
-                        {
-                            EmployeeNumber = Convert.ToInt32(fields[0]),
-                            LastName = fields[1],
-                            FirstName = fields[2],
-                            Extension = fields[3],
-                            Email = fields[4],
-                            OfficeCode = fields[5],
-                            ReportsTo = Convert.ToInt32(fields[6]),
-                            JobTitle = fields[7],
-                        };
+                        Employees employees = new Employees();
+
+                        employees.EmployeeNumber = Convert.ToInt32(fields[0]);
+                        employees.FirstName = fields[1];
+                        employees.LastName = fields[2];
+                        employees.Extension = fields[3];
+                        employees.Email = fields[4];
+                        employees.OfficeCode = fields[5];
+                        if (fields[6] == "NULL") employees.ReportsTo = null;
+                        else employees.ReportsTo = Convert.ToInt32(fields[6]);
+                        employees.JobTitle = fields[7];
 
                         context.Employees.Add(employees);
                         context.SaveChanges();
@@ -197,16 +197,16 @@ namespace CODEFIRST_DHinojosa.DAO
                     {
                         fields = parser.ReadFields();
 
-                        Orders orders = new Orders()
-                        {
-                            OrderNumber = Convert.ToInt32(fields[0]),
-                            OrderDate = Convert.ToDateTime(fields[1]),
-                            RequiredDate = Convert.ToDateTime(fields[2]),
-                            ShippedDate = Convert.ToDateTime(fields[3]),
-                            Status = fields[4],
-                            Comments = fields[5],
-                            CustomerNumber = Convert.ToInt32(fields[6]),
-                        };
+                        Orders orders = new Orders();
+
+                        orders.OrderNumber = Convert.ToInt32(fields[0]);
+                        orders.OrderDate = Convert.ToDateTime(fields[1]);
+                        orders.RequiredDate = Convert.ToDateTime(fields[2]);
+                        if (fields[3] == "NULL") orders.ShippedDate = null;
+                        else orders.ShippedDate = Convert.ToDateTime(fields[3]);
+                        orders.Status = fields[4];
+                        orders.Comments = fields[5];
+                        orders.CustomerNumber = Convert.ToInt32(fields[6]);
 
                         context.Orders.Add(orders);
                         context.SaveChanges();

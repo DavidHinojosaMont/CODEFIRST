@@ -23,7 +23,7 @@ namespace CODEFIRST_DHinojosa.MODEL
         [Column(TypeName = "date")]
         public DateTime RequiredDate { get; set; }
         [Column(TypeName = "date")]
-        public DateTime ShippedDate { get; set; }
+        public DateTime? ShippedDate { get; set; }
         [Column(TypeName = "varchar(15)")]
         public string Status { get; set; }
         [Column(TypeName = "text")]
