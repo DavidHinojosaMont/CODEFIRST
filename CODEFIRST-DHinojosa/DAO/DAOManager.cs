@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic.FileIO;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -14,7 +15,20 @@ namespace CODEFIRST_DHinojosa.DAO
     {
         ProductsDBContext context = null;
 
+        public enum ProductLine
+        {
+            ClassicCar,
+            Motorcycles,
+            Planes,
+            Ships,
+            Trains,
+            TrucksAndBuses,
+            VintageCars
+        };
+
         public DAOManager(ProductsDBContext context) { this.context = context; }
+
+        #region IMPORTS
 
         public bool ImportCustomers(string filename)
         {
@@ -81,8 +95,8 @@ namespace CODEFIRST_DHinojosa.DAO
                         Employees employees = new Employees();
 
                         employees.EmployeeNumber = Convert.ToInt32(fields[0]);
-                        employees.FirstName = fields[1];
-                        employees.LastName = fields[2];
+                        employees.FirstName = fields[2];
+                        employees.LastName = fields[1];
                         employees.Extension = fields[3];
                         employees.Email = fields[4];
                         employees.OfficeCode = fields[5];
@@ -331,5 +345,276 @@ namespace CODEFIRST_DHinojosa.DAO
 
             return done;
         }
+
+        #endregion
+
+        #region Querying
+
+        public List<ProductLines> GetProductLines() { return context.ProductLines.ToList(); }
+
+        public List<Products> GetProducts() { return context.Products.ToList(); }
+
+        public List<Offices> GetOffices() { return context.Offices.ToList(); }
+
+        public List<Employees> GetEmployees() { return context.Employees.ToList(); }
+
+        public List<Customers> GetCustomers() { return context.Customers.ToList(); }
+
+        public List<Payments> GetPayments() { return context.Payments.ToList(); }
+
+        public List<Orders> GetOrders() { return context.Orders.ToList(); }
+
+        public List<OrderDetails> GetOrderDetails() { return context.OrderDetails.ToList(); }
+
+        #endregion
+
+
+        public object GetEmployeesOffices()
+        {
+            using (var context = new ProductsDBContext())
+            {
+                var employeeOffice = context.Employees
+                    .Join(context.Offices,
+                    employee => employee.OfficeCode,
+                    office => office.OfficeCode,
+                    (employee, office) => new
+                    {
+                        EmployeeName = employee.FirstName,
+                        LastName = employee.LastName,
+                        OfficeCity = office.City,
+                        OfficeState = office.State,
+                        OfficeCountry = office.Country,
+                    }).ToList();
+
+                return employeeOffice;
+            }
+        }
+
+        public object GetProductsProdutLines(ProductLine productLineEnum)
+        {
+            using (var context = new ProductsDBContext())
+            {
+                string type = "";
+                switch (productLineEnum)
+                {
+                    case ProductLine.ClassicCar:
+                        type = "Classic Cars";
+                        break;
+                    case ProductLine.Motorcycles:
+                        type = "Motorcycles";
+                        break;
+                    case ProductLine.Planes:
+                        type = "Planes";
+                        break;
+                    case ProductLine.Ships:
+                        type = "Ships";
+                        break;
+                    case ProductLine.Trains:
+                        type = "Trains";
+                        break;
+                    case ProductLine.TrucksAndBuses:
+                        type = "Trucks and Buses";
+                        break;
+                    case ProductLine.VintageCars:
+                        type = "Vintage Cars";
+                        break;
+                }
+
+                var products = context.Products
+                    .Join(context.ProductLines,
+                    product => product.ProductLine,
+                    productLines => productLines.ProductLine,
+                    (product, productLines) => new
+                    {
+                        ProductLine = productLines.ProductLine,
+                        ProductName = product.ProductName,
+                        ProductCode = product.ProductCode,
+                    })
+                    .Where(p => p.ProductLine == type)
+                    .ToList();
+
+                return products;
+            }
+        }
+
+        public List<Customers> FilterCustomerName(string name)
+        {
+            using (var context = new ProductsDBContext())
+            {
+                List<Customers> customersList = context.Customers
+                    .Where(customer => customer.CustomerName == name)
+                .ToList();
+
+                return customersList;
+            }
+        }
+
+        public List<Employees> FilterEmployeeName(string name)
+        {
+            using (var context = new ProductsDBContext())
+            {
+                List<Employees> employeesList = context.Employees
+                    .Where(employee => employee.FirstName == name)
+                .ToList();
+
+                return employeesList;
+            }
+        }
+
+        public List<Offices> FilterOfficeCity(string name)
+        {
+            using (var context = new ProductsDBContext())
+            {
+                List<Offices> officesList = context.Offices
+                    .Where(offices => offices.City == name).ToList();
+
+                return officesList;
+            }
+        }
+
+        #region David
+
+        public void InsertCustomer(Customers customer)
+        {
+            using (context)
+            {
+
+                context.Customers.Add(customer);
+                context.SaveChanges();
+            }
+        }
+        public void UpdateCustomer(ushort number)
+        {
+            using (context)
+            {
+                Customers customerToUpdate = context.Customers.FirstOrDefault(c => c.CustomerNumber == number);
+                if (customerToUpdate != null)
+                {
+                    customerToUpdate.CustomerName = "Venito2";
+                    customerToUpdate.ContactLastName = "dfgjf";
+                    customerToUpdate.ContactFirstName = "ddgfjfgjd";
+                    customerToUpdate.Phone = "565645";
+                    customerToUpdate.AddressLine1 = "dfjdfjjksd";
+                    customerToUpdate.AddressLine2 = "dfjkfskjsdjk";
+                    customerToUpdate.City = "las vegas";
+                    customerToUpdate.State = "LA";
+                    customerToUpdate.PostalCode = "17190";
+                    customerToUpdate.Country = "ALASKA";
+                    customerToUpdate.SalesRepEmployeeNumber = 1501;
+                    customerToUpdate.CreditLimit = 1121922190110;
+
+                    context.SaveChanges();
+                }
+            }
+        }
+        public void DeleteCustomer(ushort number)
+        {
+            using (context)
+            {
+                Customers customerToDelete = context.Customers.FirstOrDefault(c => c.CustomerNumber == number);
+                if (customerToDelete != null)
+                {
+                    context.Customers.Remove(customerToDelete);
+                    context.SaveChanges();
+                }
+            }
+        }
+
+        public void InsertPayments(Payments payment)
+        {
+            using (context)
+            {
+
+                context.Payments.Add(payment);
+                context.SaveChanges();
+            }
+        }
+
+        public void UpdatePayments(ushort customerNumber, string checkNumber)
+        {
+            Payments paymentToUpdate = context.Payments.FirstOrDefault(p => p.CustomerNumber == customerNumber && p.CheckNumber == checkNumber);
+            if (paymentToUpdate != null)
+            {/*
+                paymentToUpdate.CheckNumber = txtCheckNumber;
+                paymentToUpdate.PaymentDate = txtPaymentDate;
+                paymentToUpdate.Amount = txtAmount;*/
+            }
+        }
+
+        public void DeletePayments(ushort customerNumber, string checkNumber)
+        {
+            using (context)
+            {
+                Payments paymentToDelete = context.Payments.FirstOrDefault(p => p.CustomerNumber == customerNumber && p.CheckNumber == checkNumber);
+                if (paymentToDelete != null)
+                {
+                    context.Payments.Remove(paymentToDelete);
+                    context.SaveChanges();
+                }
+            }
+        }
+        public void InsertOrder(Orders order)
+        {
+            using (context)
+            {
+
+                context.Orders.Add(order);
+                context.SaveChanges();
+            }
+        }
+
+        public void UpdateOrder(ushort orderNumber)
+        {
+            using (context)
+            {
+                Orders orderToUpdate = context.Orders.FirstOrDefault(o => o.OrderNumber == orderNumber);
+                if (orderToUpdate != null)
+                {/*
+                    orderToUpdate.OrderDate = txtOrderDate;
+                    orderToUpdate.RequiredDate = txtRequiredDate;
+                    orderToUpdate.ShippedDate = txtShippedDate;
+                    orderToUpdate.Status = txtStatus;
+                    orderToUpdate.Comments = txtComments;
+                    orderToUpdate.CustomerNumber = txtCustomer;
+                    */
+                    context.SaveChanges();
+                }
+            }
+        }
+
+        public void DeleteOrder(ushort orderNumber)
+        {
+            using (context)
+            {
+                Orders orderToDelete = context.Orders.FirstOrDefault(o => o.OrderNumber == orderNumber);
+                if (orderToDelete != null)
+                {
+                    context.Orders.Remove(orderToDelete);
+                    context.SaveChanges();
+                }
+            }
+        }
+
+        public void TraverseStatusOrders()
+        {
+            StreamWriter sW = new StreamWriter("StatusOrders.txt");
+            using (context)
+            {
+                var customer = context.Customers.Include(o => o.Orders).ThenInclude(s => s.Status).FirstOrDefault();
+                if (customer != null)
+                {
+                    foreach (var order in customer.Orders)
+                    {
+                        foreach (var status in order.Status)
+                        {
+                            sW.WriteLine($"The status of order number {order.OrderNumber} from the customer {customer.CustomerName} is {order.Status} at this moment. {order.Comments}");
+                        }
+                    }
+                }
+                sW.Close();
+            }
+        }
+
+        #endregion
     }
 }

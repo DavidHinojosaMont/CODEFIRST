@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CODEFIRST_DHinojosa.MODEL
 {
-    internal class Products
+    public class Products
     {
         public Products()
         {

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CODEFIRST_DHinojosa.MODEL
 {
-    internal class Employees
+    public class Employees
     {
         [Key]
         [Column(TypeName = "int(11)")]

@@ -9,7 +9,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CODEFIRST_DHinojosa.MODEL
 {
-    internal class Orders
+    public class Orders
     {
         public Orders() {
 

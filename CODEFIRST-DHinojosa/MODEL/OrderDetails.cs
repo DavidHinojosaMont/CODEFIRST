@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CODEFIRST_DHinojosa.MODEL
 {
-    internal class OrderDetails
+    public class OrderDetails
     {
         [Key]
         [ForeignKey("Orders")]

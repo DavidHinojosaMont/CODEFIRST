@@ -1,5 +1,6 @@
 ﻿using CODEFIRST_DHinojosa.DAO;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,14 +37,37 @@ namespace CODEFIRST_DHinojosa
         {
             InitializeComponent();
             manager = DAOFactory.CreateDAOManager(context);
-            manager.ImportProductLines(FILEPRODUCTLINES);
-            manager.ImportProducts(FILEPRODUCTS);
-            manager.ImportOffices(FILEOFFICES);
-            manager.ImportEmployees(FILEMPLOYEES);
-            manager.ImportCustomers(FILECUSTOMERS);
-            manager.ImportPayments(FILEPAYMENTS);
-            manager.ImportOrders(FILEORDERS);
-            manager.ImportOrderDetails(FILEORDERDETAILS);
+            //manager.ImportProductLines(FILEPRODUCTLINES);
+            //manager.ImportProducts(FILEPRODUCTS);
+            //manager.ImportOffices(FILEOFFICES);
+            //manager.ImportEmployees(FILEMPLOYEES);
+            //manager.ImportCustomers(FILECUSTOMERS);
+            //manager.ImportPayments(FILEPAYMENTS);
+            //manager.ImportOrders(FILEORDERS);
+            //manager.ImportOrderDetails(FILEORDERDETAILS);
+
+            dgrProductLines.ItemsSource = manager.GetProductLines();
+            dgrProducts.ItemsSource = manager.GetProducts();
+            dgrOffices.ItemsSource = manager.GetOffices();
+            dgrEmployees.ItemsSource = manager.GetEmployees();
+            dgrCustomers.ItemsSource = manager.GetCustomers();
+            dgrPayments.ItemsSource = manager.GetPayments();
+            dgrOrders.ItemsSource = manager.GetOrders();
+            dgrOrderDetails.ItemsSource = manager.GetOrderDetails();
+
+            dgrGetEmployeesOffices.ItemsSource = (IEnumerable)manager.GetEmployeesOffices();
+        }
+
+        private void btnFilterCustomer_Click(object sender, RoutedEventArgs e)
+        {
+            if(tbCustomerName.Text != null)
+                dgrFilterCustomer.ItemsSource = manager.FilterCustomerName(tbCustomerName.Text);
+        }
+
+        private void btnFilterOffices_Click(object sender, RoutedEventArgs e)
+        {
+            if (tbCustomerName.Text != null)
+                dgrFilterCustomer.ItemsSource = manager.FilterCustomerName(tbCustomerName.Text);
         }
     }
 }
