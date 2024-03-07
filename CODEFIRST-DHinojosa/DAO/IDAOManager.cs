@@ -36,32 +36,29 @@ namespace CODEFIRST_DHinojosa.DAO
         // Filter
 
         public List<Customers> FilterCustomerName(string name); // DONE
-        public List<Employees> FilterEmployeeName(string name);
-        public List<Offices> FilterOfficeCity(string name);
+        public List<Employees> FilterEmployeeName(string name); //DONE
+        public List<Offices> FilterOfficeCity(string name); //DONE
 
 
         // ------------------
         // Others
 
         public object GetEmployeesOffices(); //DONE
-        public object GetProductsProdutLines(ProductLine productLineEnum);
+        public object GetProductsProdutLines(ProductLine productLineEnum); //DONE
 
         // ------------------
         // CRUD
 
         public void InsertCustomer(Customers customer);
-        public void UpdateCustomer(ushort number);
         public void DeleteCustomer(ushort number);
         public void InsertPayments(Payments payment);
-        public void UpdatePayments(ushort customerNumber, string checkNumber);
-        public void DeletePayments(ushort customerNumber, string checkNumber);
+        public void DeletePayments(string checkNumber);
         public void InsertOrder(Orders order);
-        public void UpdateOrder(ushort orderNumber);
         public void DeleteOrder(ushort orderNumber);
 
         // ------------------
         // Traverse
 
-        public void TraverseStatusOrders();
+        public void TraverseStatusOrders(); //DONE
     }
 }

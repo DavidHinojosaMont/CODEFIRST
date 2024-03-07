@@ -476,141 +476,61 @@ namespace CODEFIRST_DHinojosa.DAO
 
         public void InsertCustomer(Customers customer)
         {
-            using (context)
-            {
-
-                context.Customers.Add(customer);
-                context.SaveChanges();
-            }
+            context.Customers.Add(customer);
+            context.SaveChanges();
         }
-        public void UpdateCustomer(ushort number)
-        {
-            using (context)
-            {
-                Customers customerToUpdate = context.Customers.FirstOrDefault(c => c.CustomerNumber == number);
-                if (customerToUpdate != null)
-                {
-                    customerToUpdate.CustomerName = "Venito2";
-                    customerToUpdate.ContactLastName = "dfgjf";
-                    customerToUpdate.ContactFirstName = "ddgfjfgjd";
-                    customerToUpdate.Phone = "565645";
-                    customerToUpdate.AddressLine1 = "dfjdfjjksd";
-                    customerToUpdate.AddressLine2 = "dfjkfskjsdjk";
-                    customerToUpdate.City = "las vegas";
-                    customerToUpdate.State = "LA";
-                    customerToUpdate.PostalCode = "17190";
-                    customerToUpdate.Country = "ALASKA";
-                    customerToUpdate.SalesRepEmployeeNumber = 1501;
-                    customerToUpdate.CreditLimit = 1121922190110;
 
-                    context.SaveChanges();
-                }
-            }
-        }
         public void DeleteCustomer(ushort number)
         {
-            using (context)
+            Customers customerToDelete = context.Customers.FirstOrDefault(c => c.CustomerNumber == number);
+            if (customerToDelete != null)
             {
-                Customers customerToDelete = context.Customers.FirstOrDefault(c => c.CustomerNumber == number);
-                if (customerToDelete != null)
-                {
-                    context.Customers.Remove(customerToDelete);
-                    context.SaveChanges();
-                }
+                context.Customers.Remove(customerToDelete);
+                context.SaveChanges();
             }
         }
 
         public void InsertPayments(Payments payment)
         {
-            using (context)
-            {
+            context.Payments.Add(payment);
+            context.SaveChanges();
+        }
 
-                context.Payments.Add(payment);
+        public void DeletePayments(string checkNumber)
+        {
+            Payments paymentToDelete = context.Payments.FirstOrDefault(p => p.CheckNumber == checkNumber);
+            if (paymentToDelete != null)
+            {
+                context.Payments.Remove(paymentToDelete);
                 context.SaveChanges();
-            }
-        }
-
-        public void UpdatePayments(ushort customerNumber, string checkNumber)
-        {
-            Payments paymentToUpdate = context.Payments.FirstOrDefault(p => p.CustomerNumber == customerNumber && p.CheckNumber == checkNumber);
-            if (paymentToUpdate != null)
-            {/*
-                paymentToUpdate.CheckNumber = txtCheckNumber;
-                paymentToUpdate.PaymentDate = txtPaymentDate;
-                paymentToUpdate.Amount = txtAmount;*/
-            }
-        }
-
-        public void DeletePayments(ushort customerNumber, string checkNumber)
-        {
-            using (context)
-            {
-                Payments paymentToDelete = context.Payments.FirstOrDefault(p => p.CustomerNumber == customerNumber && p.CheckNumber == checkNumber);
-                if (paymentToDelete != null)
-                {
-                    context.Payments.Remove(paymentToDelete);
-                    context.SaveChanges();
-                }
             }
         }
         public void InsertOrder(Orders order)
         {
-            using (context)
-            {
-
-                context.Orders.Add(order);
-                context.SaveChanges();
-            }
-        }
-
-        public void UpdateOrder(ushort orderNumber)
-        {
-            using (context)
-            {
-                Orders orderToUpdate = context.Orders.FirstOrDefault(o => o.OrderNumber == orderNumber);
-                if (orderToUpdate != null)
-                {/*
-                    orderToUpdate.OrderDate = txtOrderDate;
-                    orderToUpdate.RequiredDate = txtRequiredDate;
-                    orderToUpdate.ShippedDate = txtShippedDate;
-                    orderToUpdate.Status = txtStatus;
-                    orderToUpdate.Comments = txtComments;
-                    orderToUpdate.CustomerNumber = txtCustomer;
-                    */
-                    context.SaveChanges();
-                }
-            }
+            context.Orders.Add(order);
+            context.SaveChanges();
         }
 
         public void DeleteOrder(ushort orderNumber)
         {
-            using (context)
+            Orders orderToDelete = context.Orders.FirstOrDefault(o => o.OrderNumber == orderNumber);
+            if (orderToDelete != null)
             {
-                Orders orderToDelete = context.Orders.FirstOrDefault(o => o.OrderNumber == orderNumber);
-                if (orderToDelete != null)
-                {
-                    context.Orders.Remove(orderToDelete);
-                    context.SaveChanges();
-                }
+                context.Orders.Remove(orderToDelete);
+                context.SaveChanges();
             }
         }
 
         public void TraverseStatusOrders()
         {
-            StreamWriter sW = new StreamWriter("StatusOrders.txt");
-            using (context)
+            using (StreamWriter sW = new StreamWriter("StatusOrders.txt"))
             {
-                var customer = context.Customers.Include(o => o.Orders).ThenInclude(s => s.Status).FirstOrDefault();
-                if (customer != null)
-                {
+                var customers = context.Customers.Include(c => c.Orders).ToList();
+
+                foreach (var customer in customers)
                     foreach (var order in customer.Orders)
-                    {
-                        foreach (var status in order.Status)
-                        {
-                            sW.WriteLine($"The status of order number {order.OrderNumber} from the customer {customer.CustomerName} is {order.Status} at this moment. {order.Comments}");
-                        }
-                    }
-                }
+                        sW.WriteLine($"The status of order number {order.OrderNumber} from the customer {customer.CustomerName} is {order.Status} at this moment. {order.Comments}");
+
                 sW.Close();
             }
         }

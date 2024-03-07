@@ -10,47 +10,106 @@
         <TabControl>
             <TabItem Header="AllProductLines">
                 <Grid>
-                    <DataGrid IsReadOnly="True" Name="dgrProductLines" AutoGenerateColumns="True"/>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="14*"/>
+                    </Grid.RowDefinitions>
+                    <Button Name="btnRefreshPL" Margin="5" Content="Refresh" Click="btnRefreshPL_Click" />
+                    <DataGrid IsReadOnly="True" Name="dgrProductLines" AutoGenerateColumns="True" 
+                              Margin="5" Grid.Row="1"/>
                 </Grid>
             </TabItem>
             <TabItem Header="AllProducts">
                 <Grid>
-                    <DataGrid IsReadOnly="True" Name="dgrProducts" AutoGenerateColumns="True"/>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="14*"/>
+                    </Grid.RowDefinitions>
+                    <Button Name="btnRefreshProducts" Margin="5" Content="Refresh" Click="btnRefreshProducts_Click" />
+                    <DataGrid IsReadOnly="True" Name="dgrProducts" AutoGenerateColumns="True" Margin="5" Grid.Row="1"/>
                 </Grid>
             </TabItem>
             <TabItem Header="AllOffices">
                 <Grid>
-                    <DataGrid IsReadOnly="True" Name="dgrOffices" AutoGenerateColumns="True"/>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="14*"/>
+                    </Grid.RowDefinitions>
+                    <Button Name="btnRefreshOffices" Margin="5" Content="Refresh" Click="btnRefreshOffices_Click" />
+                    <DataGrid IsReadOnly="True" Name="dgrOffices" AutoGenerateColumns="True" Margin="5" Grid.Row="1"/>
                 </Grid>
             </TabItem>
             <TabItem Header="AllEmployees">
                 <Grid>
-                    <DataGrid IsReadOnly="True" Name="dgrEmployees" AutoGenerateColumns="True"/>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="14*"/>
+                    </Grid.RowDefinitions>
+                    <Button Name="btnRefreshEmployees" Margin="5" Content="Refresh" Click="btnRefreshEmployees_Click" />
+                    <DataGrid IsReadOnly="True" Name="dgrEmployees" AutoGenerateColumns="True" Margin="5" Grid.Row="1"/>
                 </Grid>
             </TabItem>
             <TabItem Header="AllCustomers">
                 <Grid>
-                    <DataGrid IsReadOnly="True" Name="dgrCustomers" AutoGenerateColumns="True"/>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="14*"/>
+                    </Grid.RowDefinitions>
+                    <Button Name="btnRefreshCustomers" Margin="5" Content="Refresh" Click="btnRefreshCustomers_Click" />
+                    <DataGrid IsReadOnly="True" Name="dgrCustomers" AutoGenerateColumns="True" Margin="5" Grid.Row="1"/>
                 </Grid>
             </TabItem>
             <TabItem Header="AllPayments">
                 <Grid>
-                    <DataGrid IsReadOnly="True" Name="dgrPayments" AutoGenerateColumns="True"/>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="14*"/>
+                    </Grid.RowDefinitions>
+                    <Button Name="btnRefreshPayments" Margin="5" Content="Refresh" Click="btnRefreshPayments_Click" />
+                    <DataGrid IsReadOnly="True" Name="dgrPayments" AutoGenerateColumns="True" Margin="5" Grid.Row="1"/>
                 </Grid>
             </TabItem>
             <TabItem Header="AllOrders">
                 <Grid>
-                    <DataGrid IsReadOnly="True" Name="dgrOrders" AutoGenerateColumns="True"/>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="14*"/>
+                    </Grid.RowDefinitions>
+                    <Button Name="btnRefreshOrders" Margin="5" Content="Refresh" Click="btnRefreshOrders_Click" />
+                    <DataGrid IsReadOnly="True" Name="dgrOrders" AutoGenerateColumns="True" Margin="5" Grid.Row="1"/>
                 </Grid>
             </TabItem>
             <TabItem Header="AllOrderDetails">
                 <Grid>
-                    <DataGrid IsReadOnly="True" Name="dgrOrderDetails" AutoGenerateColumns="True"/>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="14*"/>
+                    </Grid.RowDefinitions>
+                    <Button Name="btnRefreshOD" Margin="5" Content="Refresh" Click="btnRefreshOD_Click" />
+                    <DataGrid IsReadOnly="True" Name="dgrOrderDetails" AutoGenerateColumns="True" Margin="5" Grid.Row="1"/>
                 </Grid>
             </TabItem>
             <TabItem Header="GetEmployeesOffices">
                 <Grid>
                     <DataGrid IsReadOnly="True" Name="dgrGetEmployeesOffices" AutoGenerateColumns="True"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="ProductLineFilter">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="14*"/>
+                    </Grid.RowDefinitions>
+                    <ComboBox Name="cmbPL" Grid.Column="0" Margin="5" SelectionChanged="cmbPL_SelectionChanged">
+                        <ComboBoxItem>ClassicCar</ComboBoxItem>
+                        <ComboBoxItem>Motorcycles</ComboBoxItem>
+                        <ComboBoxItem>Planes</ComboBoxItem>
+                        <ComboBoxItem>Ships</ComboBoxItem>
+                        <ComboBoxItem>Trains</ComboBoxItem>
+                        <ComboBoxItem>TrucksAndBuses</ComboBoxItem>
+                        <ComboBoxItem>VintageCars</ComboBoxItem>
+                    </ComboBox>
+                    <DataGrid Name="dgrPLE" Margin="5" Grid.Row="1" IsReadOnly="True"/>
                 </Grid>
             </TabItem>
             <TabItem Header="FilterCustomer">
@@ -64,7 +123,7 @@
                         <RowDefinition Height="14*"/>
                     </Grid.RowDefinitions>
 
-                    <TextBox x:Name="tbCustomerName" Grid.Column="0" Grid.Row="0" Margin="5"/>
+                    <TextBox x:Name="tbCustomerNameFilter" Grid.Column="0" Grid.Row="0" Margin="5"/>
 
                     <Button x:Name="btnFilterCustomer" Grid.Column="1" Grid.Row="0" Margin="5" 
                             Content="Filter" Click="btnFilterCustomer_Click"/>
@@ -84,10 +143,10 @@
                         <RowDefinition Height="14*"/>
                     </Grid.RowDefinitions>
 
-                    <TextBox x:Name="tbEmployeesName" Grid.Column="0" Grid.Row="0" Margin="5"/>
+                    <TextBox x:Name="tbEmployeesNameFilter" Grid.Column="0" Grid.Row="0" Margin="5"/>
 
                     <Button x:Name="btnFilterEmployees" Grid.Column="1" Grid.Row="0" Margin="5" 
-                            Content="Filter" Click="btnFilterCustomer_Click"/>
+                            Content="Filter" Click="btnFilterEmployees_Click"/>
 
                     <DataGrid Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" 
                         IsReadOnly="True" Name="dgrFilterEmployees" AutoGenerateColumns="True"/>
@@ -104,13 +163,120 @@
                         <RowDefinition Height="14*"/>
                     </Grid.RowDefinitions>
 
-                    <TextBox x:Name="tbOfficeName" Grid.Column="0" Grid.Row="0" Margin="5"/>
+                    <TextBox x:Name="tbOfficeNameFilter" Grid.Column="0" Grid.Row="0" Margin="5"/>
 
                     <Button x:Name="btnFilterOffices" Grid.Column="1" Grid.Row="0" Margin="5" 
                             Content="Filter" Click="btnFilterOffices_Click"/>
 
                     <DataGrid Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" 
                         IsReadOnly="True" Name="dgrFilterOffices" AutoGenerateColumns="True"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="CRUD" Height="20" VerticalAlignment="Top">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="2*"/>
+
+
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Margin="10" Grid.Column="1" VerticalAlignment="Center">
+
+                        <TextBlock Text="City:"/>
+                        <TextBox Name="tbCity" Text=""/>
+                        <TextBlock Text="State:"/>
+                        <TextBox Name="tbState" Text=""/>
+                        <TextBlock Text="Postal code:"/>
+                        <TextBox Name="tbPostalCode" Text=""/>
+                        <TextBlock Text="Country:"/>
+                        <TextBox Name="tbCountry" Text=""/>
+                        <TextBlock Text="Employee number:"/>
+                        <TextBox Name="tbSalesRepEmployeeNumber" Text=""/>
+                        <TextBlock Text="Credit limit:"/>
+                        <TextBox Name="tbCreditLimit" Text=""/>
+
+                    </StackPanel>
+                    <StackPanel Grid.ColumnSpan="2" HorizontalAlignment="Center">
+                        <TextBlock Text="Customers" FontSize="40" HorizontalAlignment="Center"/>
+                        <TextBlock  Grid.ColumnSpan="2" Text="Customer Number:"/>
+                        <TextBox Name="tbCustomerNumber" Text=""/>
+                    </StackPanel>
+
+                    <StackPanel Margin="10" Grid.Row="0" Grid.RowSpan="4" VerticalAlignment="Center">
+
+                        <TextBlock Text="Customer name: "/>
+                        <TextBox Name="tbCustomerName" Text=""/>
+                        <TextBlock Text="Contact last name: "/>
+                        <TextBox Name="tbContactLastName" Text=""/>
+                        <TextBlock Text="Contact first name: "/>
+                        <TextBox Name="tbContactFirstName" Text=""/>
+                        <TextBlock Text="Phone: "/>
+                        <TextBox Name="tbPhone" Text=""/>
+                        <TextBlock Text="Address line 1: "/>
+                        <TextBox Name="tbAddressLine1" Text=""/>
+                        <TextBlock Text="Address line 2: "/>
+                        <TextBox Name="tbAddressLine2" Text=""/>
+                    </StackPanel>
+                    <StackPanel Grid.ColumnSpan="2" VerticalAlignment="Bottom" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Content="  ADD  " Height="40" Name="btnAddCustomer" Click="btnAddCustomer_Click" Margin="10"/>
+                        <Button Content="DELETE" Height="40" Name="btnDeleteCustomer" Click="btnDeleteCustomer_Click"  Margin="10"/>
+                    </StackPanel>
+                    <StackPanel Margin="10" Grid.Column="2" Grid.RowSpan="4" VerticalAlignment="Center">
+                        <TextBlock Text="Payments" FontSize="40" HorizontalAlignment="Center"/>
+
+                        <TextBlock Text="Payment Customer Number:"/>
+                        <TextBox Name="tbPaymentCustomerNumber" Text=""/>
+                        <Separator Margin="10" Visibility="Hidden"/>
+                        <TextBlock Text="Check number: "/>
+                        <TextBox Name="tbPaymentCheckNumber" Text=""/>
+                        <Separator Margin="10" Visibility="Hidden"/>
+
+                        <TextBlock Text="Payment date:"/>
+                        <DatePicker Name="dtpPaymentDate"/>
+                        <TextBlock Text="Amount: "/>
+                        <TextBox Name="tbAmount" Text=""/>
+                        <Button Content="ADD" Height="40" Name="btnAddPayment" Click="btnAddPayment_Click"/>
+                        <Separator Margin="10"/>
+                        <Button Content="DELETE" Height="40" Name="btnDeletePayment" Click="btnDeletePayment_Click"/>
+                    </StackPanel>
+
+                    <StackPanel Margin="10" Grid.Column="3" Grid.RowSpan="4" VerticalAlignment="Center">
+                        <TextBlock Text="Orders" FontSize="40" HorizontalAlignment="Center"/>
+
+                        <TextBlock Text="Order Number:"/>
+                        <TextBox Name="tbOrderNumber" Text=""/>
+                        <TextBlock Text="Order date:"/>
+                        <DatePicker Name="dtpOrderDate"/>
+
+                        <TextBlock Text="Required date:"/>
+                        <DatePicker Name="dtpRequiredDate"/>
+                        <TextBlock Text="Shipped date:"/>
+                        <DatePicker Name="dtpShippedDate"/>
+                        <TextBlock Text="Status: "/>
+                        <TextBox Name="tbStatus" Text=""/>
+                        <TextBlock Text="Comments: "/>
+                        <TextBox Name="tbComments" Text=""/>
+                        <TextBlock Text="Custimer Number: "/>
+                        <TextBox Name="tbOrderCustomerN" Text=""/>
+                        <Button Content="ADD" Height="40" Name="btnAddOrder" Click="btnAddOrder_Click"/>
+                        <Separator Margin="10"/>
+                        <Button Content="DELETE" Height="40" Name="btnDeleteOrder" Click="btnDeleteOrder_Click"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Travess">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="16*"/>
+                    </Grid.RowDefinitions>
+
+                    <Button Name="btnTravess" Content="Write File" Click="btnTravess_Click"
+                            Margin="5" Grid.Row="0"/>
+
+                    <TextBlock Text="" Margin="5" Name="tbTravess" Grid.Row="1"/>
                 </Grid>
             </TabItem>
         </TabControl>
